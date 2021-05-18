@@ -68,6 +68,12 @@ li:hover {
         grid-template-columns: 10% 9% 60% 21%;
     }
 }
+
+@media (max-width: 500px) {
+    .container {
+        grid-template-columns: 0% 10% 90% 0%;
+    }
+}
 .post {
     background-color: white;
     padding: 0px 0px;  

@@ -8,23 +8,19 @@ body {
     width: 100%;
 }
 
-header {
-    height: 5%;
-    margin-left: 7%;
-    width: 83%;
+.post header {
+    display: flex;
+    height: 8%;
     background-color: #416B3C;
-    text-align: center;
+    justify-content: center;
 }
 
-header h1 {
-    padding: 30px 0px;
+.post header h1 {
     color: #D0EECD;
 }
 
-hr {
-    position: absolute;
-    left: 30%;
-    width: 40%;
+.post article {
+    padding: 40px;
 }
 
 nav {
@@ -63,14 +59,19 @@ li:hover {
 
 .container {
     display: grid;
-    height: 90vh;
-    grid-template-columns: 7% 10% 73% 15%;
-
+    height: 100vh;
+    grid-template-columns: 17% 14% 32% 37%;
+    overflow:hidden auto;
 }
-
+@media (max-width: 1000px) {
+    .container {
+        grid-template-columns: 10% 9% 60% 21%;
+    }
+}
 .post {
     background-color: white;
-    padding: 40px 40px;  
+    padding: 0px 0px;  
+    overflow:hidden auto;
 }
 
 .post-title {
@@ -91,8 +92,60 @@ li:hover {
 }
 .post-info p {
     font-size: 14px;
-    padding: 5px 10px;
+    padding: 10px 10px;
 }
 .post-info p:first-child {
-    padding: 5px 0px;
+    padding: 10px 0px;
 }
+
+aside {
+    background-color: black;
+}
+
+aside section {
+    display: flex;
+    background-color: orange;
+    height: 300px;
+}
+
+@media (max-width: 900px) {
+    aside section {
+        display: none;
+    }
+}
+
+.interaction {
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 10px
+}
+ .interaction li {
+     text-align: center;
+     background-color: white;
+     border: none;
+ }
+
+.comment {
+     padding: 20px 0px 20px 20px;
+}
+
+.comment-content {
+     display: flex;
+     flex-direction: row;
+}
+
+.comment-content p {
+    padding: 10px 0px 0px 20px;
+}
+.comment-content h3 {
+    padding: 00px 0px 0px 20px;
+}
+.comment-content h4 {
+    padding: 0px 0px 0px 20px;
+}
+.comment-content h5 {
+    padding: 0px 0px 0px 20px;
+}
+

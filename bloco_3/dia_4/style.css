@@ -4,23 +4,61 @@
 }
 
 body {
-    background-color: #5E6B5C;
+    font-family: 'Roboto', sans-serif;
+    background-color: #17222c;
+    color: white;
     width: 100%;
+    overflow:hidden auto;
 }
 
-.post header {
+.logo-site {
     display: flex;
-    height: 8%;
-    background-color: #416B3C;
-    justify-content: center;
+    height: 2%;
+    align-items: center;
+    border: 2px solid #243447;
+    border-bottom: none;
 }
 
-.post header h1 {
-    color: #D0EECD;
+.logo-site h2 {
+    color: white;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+#arrow-back {
+    color: #00acee;
+    font-size: 15px;
+    margin: 10px;
+}
+
+#tab-navegation {
+    font-size: 25px;
+}
+
+.header-post {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-post h1 {
+    font-size: 20px;
+    color: white;
+    margin: 20px 0px;
+}
+
+.header-post-profile {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-profile {
+    margin-left: 10px;
 }
 
 .post article {
-    padding: 40px;
+    border:2px solid #243447;
+    border-bottom: none;
+    padding: 10px 40px 0px 40px;
 }
 
 nav {
@@ -40,15 +78,13 @@ ul{
     padding: 0;
     justify-content:start;
     align-items: center;
-    background-color: blue;
+    margin-top: 50px;
 }
 li {
     list-style: none;
     padding: 10px;
     margin: 10px;
     width: 100px;
-    background-color: #6FB867;
-    border: 1px solid black;
     opacity: 0.9;
     cursor: pointer;
 }
@@ -60,32 +96,35 @@ li:hover {
 .container {
     display: grid;
     height: 100vh;
-    grid-template-columns: 17% 14% 32% 37%;
+    grid-template-columns: 5% 15% 48% 37%;
     overflow:hidden auto;
 }
 @media (max-width: 1000px) {
     .container {
-        grid-template-columns: 10% 9% 60% 21%;
+        grid-template-columns: 4% 15% 65% 21%;
+    }
+}
+
+@media (max-width: 700px) {
+    .container {
+        grid-template-columns: 0% 15% 83% 2%;
     }
 }
 
 @media (max-width: 500px) {
     .container {
-        grid-template-columns: 0% 10% 90% 0%;
+        grid-template-columns: 0% 15% 90% 0%;
     }
 }
 .post {
-    background-color: white;
     padding: 0px 0px;  
-    overflow:hidden auto;
 }
-
 .post-title {
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .post-content {
-    font-size: 16px;
+    font-size: 14px;
 }
 .post-image {
     margin-top: 30px;
@@ -104,13 +143,10 @@ li:hover {
     padding: 10px 0px;
 }
 
-aside {
-    background-color: black;
-}
+
 
 aside section {
     display: flex;
-    background-color: orange;
     height: 300px;
 }
 
@@ -124,34 +160,101 @@ aside section {
     height: 20px;
     display: flex;
     flex-direction: row;
-    background-color: white;
-    padding: 10px
+    padding: 10px;
+    margin: 0px;
 }
  .interaction li {
-     text-align: center;
-     background-color: white;
-     border: none;
+    text-align: center;
+    border: none;
  }
 
-.comment {
-     padding: 20px 0px 20px 20px;
+hr {
+    border-color: #243447;
+}
+
+.comment-container {
+    border-top: solid 2px #243447;
+    margin: 0px -40px; 
+    padding: 20px 0px 10px 20px;
+}
+
+.comment-container:last-child {
+    border-bottom: none;
 }
 
 .comment-content {
-     display: flex;
-     flex-direction: row;
+    padding: 0px 40px 0px 10px;
 }
 
 .comment-content p {
-    padding: 10px 0px 0px 20px;
-}
-.comment-content h3 {
-    padding: 00px 0px 0px 20px;
-}
-.comment-content h4 {
-    padding: 0px 0px 0px 20px;
-}
-.comment-content h5 {
-    padding: 0px 0px 0px 20px;
+
+    font-size: 13px;
 }
 
+.comment-content h3 {
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-profile {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-profile p {
+    font-size: 16px;
+}
+
+.comment-profile p:last-child {
+    font-size: 14px;
+    padding-left: 5px;
+}
+
+.comment-text {
+    margin-top: 10px;
+}
+
+.comment-text p{
+    font-size: 14px;
+}
+
+.comment-interaction {
+    margin-left: 10px;
+}
+
+.comment-image-profile img {
+    margin-left: -20px;
+}
+
+.comment-image {
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.video-responsivo {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    height: 30px;
+    margin: 0 -100% -40px -100%;
+    background-color: #0d1317;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+footer h3 {
+    font-size: 12px;
+    align-items: center;
+}

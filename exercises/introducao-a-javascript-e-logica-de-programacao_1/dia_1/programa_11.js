@@ -1,4 +1,4 @@
-var salario = 3000;
+var salario = 5000;
 var salarioDesconto = ""
 
 if (salario <= 1556.94 && salario > 0) {

@@ -1,3 +1,4 @@
+/* 
 var a = 1;
 var b = 2;
 
@@ -12,4 +13,24 @@ console.log (subtracao)
 console.log (multiplicacao)
 console.log (divisao)
 console.log (modulo)
+*/
+
+function calc (num1,num2,operacao ) {
+
+  if (operacao == '+') {
+    return num1 + num2
+  } else if (operacao == '-') {
+    return num1 - num2
+  } else if (operacao == '*') {
+    return num1 * num2
+  } else if (operacao == '/') {
+    return num1 / num2
+  } else if (operacao == '%') {
+    return num1 % num2
+  } else {
+    return 'não é uma operação valida'
+  }
+}
+
+console.log (calc(3,5,'/'))
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Exercício 5.1</title>
+
+    <style>
+      div {
+        border-color: black;
+        border-style: solid;
+      }
+      .title {
+        text-align: center;
+      }
+
+      .main-content {
+        background-color: yellow;
+      }
+
+      .main-content .center-content {
+        background-color: red;
+        width: 50%;
+        margin: 0 auto;
+      }
+
+      .main-content .center-content p {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Exercício 5.1 - JavaEscripito </h1>
+    <div class="main-content">
+      <div class="center-content">
+        <p>Texto padrão do nosso site</p>
+        <p>-----</p>
+        <p>Trybe</p>
+        <input type="button" value="1" onclick="exercicio1()">
+        <input type="button" value="2" onclick="exercicio2()">
+        <input type="button" value="3" onclick="exercicio3()">
+        <input type="button" value="4" onclick="exercicio4()">
+        <input type="button" value="5" onclick="exercicio5()">
+        <input type="button" value="6" onclick="exercicio6()">
+      </div>
+    </div>
+    <script>
+      function exercicio1 () {
+        document.getElementsByTagName('p')[1].innerText = 'me vejo trabalhando em uma grande empresa na area da tecnologia'
+      }
+      function exercicio2 () {
+        document.getElementsByClassName('main-content')[0].style.backgroundColor = 'rgb(76,164,109)'
+      }
+      function exercicio3 () {
+        document.getElementsByClassName('center-content')[0].style.backgroundColor = 'white'
+      }
+      function exercicio4 () {
+        document.getElementsByClassName('title')[0].innerText = 'Exercício 5.1 - JavaScript'
+      }
+      function exercicio5 () {
+        for (let index = 0; document.getElementsByTagName('p').length > index; index += 1)
+        document.getElementsByTagName('p')[index].style.textTransform = 'uppercase'
+      }
+      function exercicio6 () {
+        for (let index = 0; document.getElementsByTagName('p').length > index; index += 1)
+        console.log (document.getElementsByTagName('p')[index])
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Exercício 5.2</title>
+    <style>
+      div {
+        border-color: black;
+        border-style: solid;
+      }
+
+      .title {
+        text-align: center;
+      }
+
+      .main-content {
+        background-color: yellow;
+      }
+
+      .main-content .center-content {
+        background-color: red;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .main-content .center-content p {
+        font-style: italic;
+      }
+
+      .main-content .left-content {
+        background-color: green;
+        width: 60%;
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      .main-content .left-content .small-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 100%;
+      }
+
+      .main-content .right-content {
+        background-color: blue;
+        width: 60%;
+        margin-left: auto;
+        margin-right: 0;
+      }
+
+      .main-content .description {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <script>
+      //1
+      let title = document.createElement('h1')
+      title.innerHTML = 'Exercício 5.2 - JavaScript DOM'
+      document.body.appendChild(title)
+      //2
+      let conteudoPrincipal = document.createElement('div')
+      conteudoPrincipal.classList.add('main-content')
+      document.body.appendChild(conteudoPrincipal)
+      //3
+      let conteudoCentral = document.createElement('div')
+      conteudoCentral.classList.add('center-content')
+      conteudoPrincipal.appendChild(conteudoCentral)
+      //4
+      let conteudoDoConteudoCentral = document.createElement('p')
+      conteudoDoConteudoCentral.innerHTML = 'Algum texto'
+      conteudoCentral.appendChild(conteudoDoConteudoCentral)
+      //5
+      let conteudoDaEsquerda = document.createElement('div')
+      conteudoDaEsquerda.classList.add('left-content')
+      conteudoPrincipal.appendChild(conteudoDaEsquerda)
+      //6
+      let conteudoDaDireita = document.createElement('div')
+      conteudoDaDireita.classList.add('right-content')
+      conteudoPrincipal.appendChild(conteudoDaDireita)
+      //7
+      let imagemDoConteudoDaEsquerda = document.createElement('img')
+      imagemDoConteudoDaEsquerda.classList.add('small-image')
+      imagemDoConteudoDaEsquerda.src = 'https://picsum.photos/200'
+      conteudoDaEsquerda.appendChild(imagemDoConteudoDaEsquerda)
+      //8
+      let listaDoConteudoDaDireita = document.createElement('ul')
+      conteudoDaDireita.appendChild(listaDoConteudoDaDireita)
+
+      for (let index = 1; 11 > index; index += 1) {
+
+        let numerosDaLista = document.createElement('li')
+        numerosDaLista.innerText = index
+
+        listaDoConteudoDaDireita.appendChild(numerosDaLista)
+
+      }
+      //9 
+      for (let index = 0; 3 > index; index += 1 ){
+        let tagsH3DoConteudoPrincipal = document.createElement('h3')
+
+        conteudoPrincipal.appendChild(tagsH3DoConteudoPrincipal)
+      //11
+        tagsH3DoConteudoPrincipal.classList.add('description')
+      }
+      //10
+      title.classList.add('title')
+      //12
+      conteudoPrincipal.removeChild(conteudoDaEsquerda)
+      //13
+      conteudoDaDireita.style.marginRight = 'auto'
+      //14
+      conteudoPrincipal.style.backgroundColor = 'green'
+      //15
+      for (let index = 0; 2 > index; index += 1) {
+        listaDoConteudoDaDireita.removeChild(listaDoConteudoDaDireita.lastChild)
+      }
+
+      
+    </script>
+
+  </body>
+</html>

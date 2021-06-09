@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <form action="" method="get">
+    <fieldset>
+      <input type="text" required maxlength="40" placeholder="nome">
+      <input type="email" required maxlength="50" placeholder="e-mail">
+      <input type="text" required maxlength="11" placeholder="CPF">
+      <input type="text" required maxlength="200" placeholder="endereço">
+      <input type="text" required maxlength="28" placeholder="cidade">
+      <select name="" id="estados"></select>
+      <label for="home" >
+        <input type="radio" name="home" required>casa
+        <input type="radio" name="home" required>apartamento
+      </label>
+    </fieldset>
+    <fieldset>
+      <textarea maxlength="1000" cols="30" rows="10" required placeholder="resumo do currículo"></textarea>
+      <input type="text" maxlength="40" required placeholder="cargo">
+      <input type="text" maxlength="500" required placeholder="descrição do cargo">
+      <label for="data-inicio">
+        data de inicio
+        <input type="date" name="data-inicio" id="datePickerId" required>
+      </label>
+    </fieldset>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script src="./script.js"></script>
+</body>
+</html>

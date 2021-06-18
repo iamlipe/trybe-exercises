@@ -4,35 +4,167 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" type="text/css" href="./Semantic-UI-CSS-master/semantic.min.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="./Semantic-UI-CSS-master/semantic.min.js"></script>
+  <link rel="stylesheet" href="./style.css">
+
   <title>Document</title>
 </head>
 <body>
-  <form action="" method="get">
-    <fieldset>
-      <input type="text" required maxlength="40" placeholder="nome">
-      <input type="email" required maxlength="50" placeholder="e-mail">
-      <input type="text" required maxlength="11" placeholder="CPF">
-      <input type="text" required maxlength="200" placeholder="endereço">
-      <input type="text" required maxlength="28" placeholder="cidade">
-      <select name="" id="estados"></select>
-      <label for="home" >
-        <input type="radio" name="home" required>casa
-        <input type="radio" name="home" required>apartamento
-      </label>
-    </fieldset>
-    <fieldset>
-      <textarea maxlength="1000" cols="30" rows="10" required placeholder="resumo do currículo"></textarea>
-      <input type="text" maxlength="40" required placeholder="cargo">
-      <input type="text" maxlength="500" required placeholder="descrição do cargo">
-      <label for="data-inicio">
-        data de inicio
-        <input type="date" name="data-inicio" id="datePickerId" required>
-      </label>
-    </fieldset>
-    <button type="submit">Enviar</button>
-  </form>
 
+  <h1 class="center" style="text-transform: uppercase; color: whitesmoke; font-size: 50px; text-align: center;">Formulario de cadastro <br> usando semantic UI</h1>
+
+  <div class="center" id="content">
+    <div class="container">
+      <form class="ui form">
+
+        <fieldset>
+          <div class="field">
+            <div class="two fields">
+              <div class="twelve wide field required">
+                <label style="color: white;">Nome completo</label>
+                <input class="i" type="text" name="Nome" placeholder="Name" required>
+              </div>
+              <div class="four wide field required">
+                <label style="color: white;">CPF</label>
+                <input class="i" type="text" name="CPF" placeholder="CPF"required>
+              </div>
+            </div>
+  
+            <div class="field required">
+              <label style="color: white;">E-mail</label>
+              <input class="i" type="email" name="E-mail" placeholder="E-mail"required>
+            </div>
+  
+            <div class="three fields required">
+              <div class="field">
+                <label style="color: white;">Estado</label>
+                <select class="ui fluid dropdown i" id="uf" name="Estado" required></select>
+              </div>
+              <div class="field required">
+                <label style="color: white;">CEP</label>
+                <input class="i" id="cep" name="CEP" type="text" required>
+              </div>
+              <div class="field required">
+                <label style="color: white;">Cidade</label>
+                <input class="i" id="cidade" type="text" name="Cidade" placeholder="Cidade" required>
+              </div>
+            </div>
+            <div class="three fields required">
+              <div class="four wide field">
+                <label style="color: white;">Bairro</label>
+                <input class="i" id="bairro" name="Bairro" type="text" required >
+              </div>
+              <div class="twelve wide field required">
+                <label style="color: white;">Endereço</label>
+                <input class="i" id="logradouro" type="text" name="Endereço" placeholder="Endereço" required>
+              </div>
+              <div class="two wide field required">
+                <label style="color: white;">Número</label>
+                <input class="i" id="numero" name="Número" type="text" required>
+              </div>
+            </div>
+
+  
+            <div class="ui form">
+              <div class="inline fields ">
+                <label for="Residencia" class="i" style="color: white;">Tipo de residencia:</label>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="Residencia" checked>
+                    <label style="color: white;">Apartamento</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="Residencia">
+                    <label style="color: white;">Casa</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        
+        <fieldset>
+          <div class="ui form" id="descriptionCV" >
+            <div class="field required">
+              <label style="color: white;">Resumo do currículo</label>
+              <textarea class="i" name="Resumo do currículo"></textarea>
+            </div>
+            <div >
+              <div class="two fields required">
+                <div class="field">
+                  <label style="color: white;">Cargo</label>
+                  <input type="text" name="Cargo" class="i" placeholder="Cargo">
+                </div>
+                <div class="field required">
+                  <label style="color: white;">Data</label>
+                  <input type="date" name="Data" class="i" id="datePickerId">
+                </div>
+              </div>
+              <div class="field required">
+                <label style="color: white;">Descrição do cargo</label>
+                <textarea rows="3" name="Descrição do cargo" class="i"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="field end" id="btn-office">
+            <div class="ui vertical animated button" tabindex="0" id="adicionar">
+              <div class="hidden content"> Add </div>
+              <div class="visible content">
+                <i class="plus icon"></i>
+              </div>
+            </div>
+            <div class="none" id="none">
+              <div class="ui vertical animated button" tabindex="0" id="remover">
+                <div class="hidden content"> remove </div>
+                <div class="visible content">
+                  <i class="plus icon"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui right labeled left icon input">
+            <i class="tags icon"></i>
+            <input type="text" placeholder="Digite as tags">
+            <a class="ui tag label">Adicionar Tag </a>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="field">
+            <div class="ui checkbox required">
+              <input type="checkbox" tabindex="0">
+              <label style="color: white;" >Eu concordo com os Termos e Condições</label>
+            </div>
+          </div>  
+          <br>
+          <a class="ui inverted green button" id="send"> Enviar </a>
+          <button type="reset" class="ui inverted yellow button"> Apagar </button>
+        </fieldset>
+      </form>
+
+
+    </div>
+  </div>
+
+  <div class="ui modal hidden">
+    <i class="close icon"></i>
+    <div class="header" id="review">
+    </div>
+
+    <div class="actions">
+      <div class="ui black deny button">
+        Nope
+      </div>
+      <div class="ui positive right labeled icon button">
+        Yep, that's me
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  </div>
   <script src="./script.js"></script>
 </body>
 </html>

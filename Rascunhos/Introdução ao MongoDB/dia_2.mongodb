@@ -1,0 +1,138 @@
+// OPERADORE DE COMPARAÇÃO
+// EXERCICIO 1
+use('business')
+db.restaurants.find({ borough: { $in: ['Queens', 'Staten Island', 'Bronx' ] } }).count()
+
+// EXERCICIO 2
+
+use('business')
+db.restaurants.find({cuisine: 'American'}).count();
+
+// EXERCICIO 3
+use('business')
+db.restaurants.find({ rating: { $gte: 8 } }).count();
+
+// EXERCICIO 4
+use('business')
+db.restaurants.find({ rating: { $lt: 4 } }).count();
+
+// EXERCICIO 5
+use('business')
+db.restaurants.find({ rating: { $nin: [5, 6, 7] } }).count();
+
+// OPERADORES LOGICOS
+// EXERCICIO 1
+use('business')
+db.restaurants.find({ rating: { $not: { $lte: 5 } } }).count();
+
+// EXERCICIO 2
+use('business')
+db.restaurants.find({ 
+  $and: [
+		{ rating: { $gte: 6 } },
+		{ borough: 'Brooklyn' }
+  ]
+}).count()
+
+// EXERCICIO 3
+use('business')
+db.restaurants.find({
+	$and: [
+		{ borough: { $in: ['Queens', 'Staten Island', 'Brooklyn'] } },
+		{ rating: { $gt: 4 } }
+	]
+}).count();
+
+// EXERCICIO 4
+use('business')
+db.restaurants.find({
+	$and: [
+		{ rating: { $ne: 1 } },
+		{ cuisine: { $ne: 'American' } }
+	]
+}).count()
+
+// EXERCICIO 5
+use('business')
+db.restaurants.find({
+	$and: [
+		{ rating: { $gt: 6, $lt: 10 } },
+		{
+			$or: [
+				{ borough: 'Brooklyn' },
+				{ cuisine: 'Delicatessen' }
+			]
+		}
+	]
+}).count();
+
+// METODO SORT()
+// EXERCICIO 1
+use('business')
+db.restaurants.find().sort({ name: 1 });
+
+// EXERCICIO 2
+use('business')
+db.restaurants.find().sort({ rating: -1 });
+
+// REMOVENDO DOCUMENTOS
+// EXERCICIO 1
+use('business')
+db.restaurants.deleteOne({ cuisine: { $in: ['Ice Cream', 'Gelato', 'Yogurt', 'Ices'] } });
+
+// EXERCICIO 2
+use('business')
+db.restaurants.deleteMany({ cuisine: 'American' });
+
+// EXERCICIOS DA AULA AO VIVO
+// EXERCICIO 1
+use('class')
+db.filmes.find({ diretor: "Quentin Tarantino", "avaliacao.bom": { $gt: 5, $lt: 10 } });
+
+// EXERCICIO 2
+use('class')
+db.filmes.find({ ano: 2014, "avaliacao.ruim": { $not: { $gt: 5, $lt: 10 } } });
+
+// EXERCICIO 3
+use('class')
+db.filmes.find({ diretor: { $in: ['Christopher Nolan', 'Peter Jackson'] } })
+
+// EXERCICIO 4
+use('class')
+db.filmes.find({
+	$and: [
+    { diretor: 'Steven Spielberg', 
+      $nor: [
+        {titulo: 'Indiana Jones e a Última Cruzada'}
+      ]},
+    { ano: { $ne: 2001 } }
+  ]
+})
+
+// EXERCICIO 5
+use('class')
+db.filmes.insertOne({titulo: 'Um Lugar Silencioso 2'})
+
+// EXERCICIO 6
+
+use('class')
+db.filmes.find({ diretor: { $exists: false } })
+
+// EXERCICIO 7
+use('class')
+db.filmes.find({}, { 'avaliacao.ruim': 0, 'avaliacao.medio': 0 })
+  .sort({
+    diretor: 1,
+    titulo: 1,
+    ano: -1,
+    'avaliacao.bom': -1
+  }
+);
+
+// EXERCICIO 8
+use('class')
+db.filmes.deleteMany({ diretor: 'Quentin Tarantino' })
+
+// EXERCICIO 9
+use('class')
+db.filmes.find({ diretor: 'Quentin Tarantino' }).count()

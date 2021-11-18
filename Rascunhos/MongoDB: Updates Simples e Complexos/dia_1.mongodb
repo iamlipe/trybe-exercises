@@ -1,0 +1,111 @@
+// UPDATE ONE -> ALTERA APENAS O PRIMEIRO DOCUMENTO QUE SATISFAZ O FILTRO
+use("conteudo_trybe")
+db.inventory.updateOne(
+  { item: "paper" }, // -> FILTRO DO DOCUMENTO QUE SE DESEJA ALTERAR OBS: CASO TENHO MAIS DOCUMENTOS QUE SATISFASA O FILTRO APENAS O PRIMEIRO DOCUMENTO SERA ALTERADO
+  { $set: { "size.uom": "cm", status: "P" } } // -> OQUE 
+);
+
+use("conteudo_trybe")
+db.inventory.find()
+
+// UPDATE MANY -> ALTERA TODOS OS DOCUMENTOS QUE SATISFAZ O FILTRO 
+use("conteudo_trybe")
+db.inventory.updateMany(
+  { "qty": { $lt: 50 } }, // -> FILTRO
+  { $set: { "size.uom": "in", status: "P" } } // -> UPDATE
+);
+
+use("conteudo_trybe");
+db.inventory.find();
+
+// $set
+use("conteudo_trybe");
+db.products.update(
+  { _id: 100 },
+  { $set: {
+      quantity: 500,
+      details: { model: "14Q3", make: "xyz" },
+      tags: [ "coats", "outerwear", "clothing" ]
+    }
+  }
+);
+
+// ALTERAR VALORES DE UM ARRAY
+use("conteudo_trybe");
+db.products.update(
+  { _id: 100 },
+  { $set: {
+      "tags.1": "rain gear",
+      "ratings.0.rating": 2
+    }
+  }
+);
+
+use("conteudo_trybe");
+db.products.find()
+
+// $mul -> MULTIPLICA O VALOR DO CAMPO FILTRADO
+use("conteudo_trybe");
+db.products.update(
+  { _id: 1 },
+  { $mul: { price: NumberDecimal("1.25"), qty: 2 } }
+);
+
+// OBS: CASO NÃO EXISTA O CAMPO ESPECIFICADO NO DOCUMENTO ELE IRA CRIAR ESSE CAMPO E DARA O VALOR DE 0
+
+// $inc -> INCREMENTA OU DECREMENTA O VALOR DO CAMPO FILTRADO
+use("conteudo_trybe");
+db.increment.update(
+  { sku: "abc123" },
+  { $inc: { quantity: -2, "metrics.orders": 1 } }
+);
+
+use("conteudo_trybe");
+db.increment.find()
+
+// $min & $max -> $min ALTERA QUANDO O VALOR PASSADO E MENOR DO QUE O DO CAMPO, $max ALTERA QUANDO O VALOR PASSADO E MAIOR DO QUE O DO CAMPO
+
+use("conteudo_trybe");
+db.collection.updateMany({}, { $max: { campo: 75 } });
+
+use('conteudo_trybe');
+db.collection.updateMany({}, { $min: { campo: 40 } });
+
+// Você pode utilizar os operadores $min e $max para comparar valores do tipo Date
+
+//$currentDate -> INSERE UM VALOR COM A ATUAL DATA
+use("conteudo_trybe");
+db.customers.updateOne(
+  { _id: 1 },
+  { $currentDate: {
+      lastModified: true, // USANDO UM VALOR BOLEANDO ALTERAR O VALOR DO CAMPO PARA A DATA ATUAL
+      "cancellation.date": { $type: "date" } // $type -> INSERE A DATA ATUAL NO FORMATO QUE DESEJAR "date" ou "timestamp"
+    }, $set: {
+      "cancellation.reason": "user request",
+      status: "D"
+    }
+  }
+);
+
+// $rename -> RENOMEIA A CHAVE DO DOCUMENTO
+use("conteudo_trybe");
+db.fruits.updateOne(
+  { name: "Banana" },
+  { $rename: {
+      "name": "productName"
+    }
+  }
+);
+
+use("conteudo_trybe");
+db.fruits.find()
+
+// $unset ->  REMOVE UMA CHAVE DO DOCUMENTO
+use("conteudo_trybe");
+db.fruits.updateMany(
+  { productName: "Banana" },
+  { $unset: { quantity: "" } }
+);
+
+use("conteudo_trybe");
+db.fruits.find();

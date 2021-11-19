@@ -1,0 +1,152 @@
+use("class");
+db.movies.find();
+
+// EXERCICIO 1
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $push: { category: "Superhero" } }
+);
+
+// EXERCICIO 2
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $push: 
+    { category:  
+      { $each: ["villain", "comic-based"] }
+    }
+  }
+);
+
+// EXERCICIO 3
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $pop: { category: -1 } }
+);
+
+// EXERCICIO 4  
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $pull: { category: "adventure" } }
+);
+
+// EXERCICIO 5
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $pop: { category: 1 } }
+);
+
+// EXERCICIO 6
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $addToSet: { category: "action" } }
+)
+
+// EXERCICIO 7
+use("class");
+db.movies.updateMany(
+  { $or: [
+    { title: "Batman" },
+    { title: "Home Alone" }
+    ] 
+  },
+  { $push: { category: "90's" } }
+)
+
+// EXERCICIO 8
+use("class");
+db.movies.updateOne(
+  { title: "Home Alone" },
+  { 
+    $push: { 
+      cast: { 
+        $each: [
+          {
+            "actor": "Macaulay Culkin",
+            "character": "Kevin"
+          },
+          {
+            "actor": "Joe Pesci",
+            "character": "Harry"
+          },
+          {
+            "actor": "Daniel Stern"
+          }
+        ] 
+      } 
+    } 
+  }
+)
+
+// EXERCICIO 9
+use("class");
+db.movies.updateOne(
+  { title: "Home Alone" },
+  {  
+    $set: {
+      "cast.$[elemento].character": "Marv"
+    }
+  },
+  { arrayFilters: [ { "elemento.actor": "Daniel Stern" } ] }
+);
+
+// EXERCICIO 10
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $push: 
+    { cast: 
+      { 
+        $each: [
+          {
+            "character": "Batman"
+          },
+          {
+            "character": "Alfred"
+          },
+          {
+            "character": "Coringa"
+          }
+        ] 
+      } 
+    } 
+  }
+)
+
+// EXERCICIO 11
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  {  
+    $push: {
+      "cast.$[elemento1].actor": "Christian Bale",
+      "cast.$[elemento2].actor": "Michael Caine",
+      "cast.$[elemento3].actor": "Heath Ledger"
+    }
+  },
+  { arrayFilters: [ 
+    { "elemento1.character": "Batman" },
+    { "elemento2.character": "Alfred" },
+    { "elemento3.character": "Coringa" }
+    ] 
+  }
+);
+
+// EXERCICIO 12
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $push: {
+      "cast.$[elemento].actor": {
+        $each: ["Michael Keaton" , "Val Kilmer", "George Clooney"],
+        $sort: 1,
+      }
+    } 
+  },
+  { arrayFilters: [ { "elemento.character": "Batman" } ] }
+)

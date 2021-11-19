@@ -1,0 +1,192 @@
+use("sales");
+db.supplies.find();
+
+// $push -> ADICIONANDO APENAS UM ITEM NO ARRAY
+use("sales");
+db.supplies.updateOne(
+  { _id: 1 },
+  {
+    $push: {
+      items: {
+        "name": "macbook",
+        "price":  10005.29,
+        "quantity": 3,
+      },
+    },
+  },
+);
+
+
+// $each -> ADICIONANDO MULTIPLOS ITENS NO ARRAY
+use("sales");
+db.supplies.updateOne(
+  {},
+  {
+    $push: {
+      items: {
+        $each: [
+          {
+            "name": "pens",
+            "price": 56.12,
+            "quantity": 5,
+          },
+          {
+            "name": "envelopes",
+            "price": 19.95,
+            "quantity": 8,
+          },
+        ],
+      },
+    },
+  },
+  { upsert: true }, // -> OPTION UPSERT IRÁ CRIAR UM DOCUMENTO CASO NÃO ENCONTRAR UM DOCUMENTO QUE DE MATCH NO FILTRO
+);
+
+// MODIFICADORES $sort e $slice
+// OBS: MODIFICADORES SÓ PODE SER USANDO SE ESTIVER USANDO O OPERADOR $each
+use("sales");
+db.supplies.updateOne(
+  { _id: 1 },
+  {
+    $push: {
+      items: {
+        $each: [
+          {
+            "name" : "notepad",
+            "price" : 35.29,
+            "quantity" : 2,
+          },
+          {
+            "name": "envelopes",
+            "price": 19.95,
+            "quantity": 8,
+          },
+          {
+            "name": "pens",
+            "price": 56.12,
+            "quantity": 5,
+          },
+        ],
+        $sort: { quantity: -1 }, // -> IRÁ ORDENAR OS ITENS NO ARRAY, -1 -> DESCRESCENTE; 1 -> CRESCENTE
+        $slice: 2, // -> DEFINE QUANTOS ITENS PODERÁ CONTER DENTRO DO ARRAY, NESSE CASO APENAS DOIS 
+      },
+    },
+  },
+  { upsert: true },
+);
+
+// $pop
+use("sales")
+db.supplies.updateOne(
+  { _id: 1},
+  {
+    $pop: { items: -1 } // OBS: -1 -> REMOVE O PRIMEIRO ITEM DO ARRAY; 1 -> REMOVE O ULTIMO ITEM DO ARRAY
+  }
+)
+
+// $pull
+use("sales");
+db.supplies.updateOne(
+  {_id: 1},
+  { $pull: { items: { name: "pens" } } }
+)
+
+
+// ADICIONANDO COLEÇÃO
+use("sales")
+db.inventory.insertOne({
+  _id: 1,
+  item: "polarizing_filter",
+  tags: ["electronics", "camera"],
+});
+
+use("sales");
+db.inventory.find();
+
+// $addToSet -> É UMA ALTERNATIVA AO OPERADORR $push COM A DIFERENÇA QUE NAO IRÁ ADICONAR ITEM REPETIDOS DENTRO DE UM ARRAY.
+use("sales");
+db.inventory.updateOne(
+  { _id: 1 },
+  { $addToSet: { tags: "accessories" } }
+)
+
+use("sales")
+db.inventory.updateOne(
+  { _id: 1 },
+  { $pull: { tags: { $in: ["camera", "accessories"] } } }
+)
+
+// $addToSet com $each
+use("sales");
+db.inventory.updateOne(
+  { _id: 1 },
+  {
+    $addToSet: {
+      tags: {
+        $each: ["camera", "electronics", "accessories"],
+      },
+    },
+  },
+);
+
+use("sales");
+db.recipes.find();
+
+// ADICIONANDO COLEÇÃO
+use("sales");
+db.recipes.insertMany([
+  {
+    title: "Panqueca Simples",
+    ingredients: [
+      { name: "Farinha", quantity: 2},
+      { name: "Oleo", quantity: 4 },
+      { name: "Leite", quantity: 1 },
+    ],
+  },
+  {
+    title: "Bolo de Cenoura",
+    ingredients: [
+      { name: "Farinha", quantity: 2},
+      { name: "Oleo", quantity: 1, unit: "xícara" },
+      { name: "Ovo", quantity: 3},
+      { name: "Cenoura", quantity: 3},
+      { name: "Fermento", quantity: 1},
+    ],
+  },
+]);
+
+// arrayFilters
+use("sales");
+db.recipes.updateOne(
+  { title: "Panqueca Simples" },
+  {
+    $set : {
+      "ingredients.$[elemento].name": "Farinha Integral",
+    },
+  },
+  { arrayFilters: [ { "elemento.name": "Farinha" } ] },
+);
+
+use("sales");
+db.recipes.updateOne(
+  { title: "Panqueca Simples" },
+  {
+    $set : {
+      "ingredients.$[elemento].unit": "xícara",
+    },
+  },
+  { arrayFilters: [ { "elemento.name": "Farinha Integral" } ] },
+);
+
+// ALTERAR TODOS O ELEMENTOS FARINHAS POR FARINHA INTEGRAL E ADICIONAR O UNIT COMO XICARA
+use("sales");
+db.recipes.updateMany( // Passamos de updateOne para updateMany.
+  {}, // Retiramos a restrição do título.
+  {
+    $set : {
+      "ingredients.$[elemento].unit": "xícara", // Setamos `unit` como "xícara",
+      "ingredients.$[elemento].name": "Farinha Integral", // `name` como "Farinha Integral".
+    },
+  },
+  { arrayFilters: [ { "elemento.name": "Farinha" } ] }, // Filtramos os arrays que o valor da propriedade `name` seja "Farinha".
+);

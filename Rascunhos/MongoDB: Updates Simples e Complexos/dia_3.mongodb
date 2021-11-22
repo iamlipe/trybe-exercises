@@ -1,0 +1,43 @@
+use("conteudo_trybe");
+db.survey.find();
+
+// $elemMatch
+use("conteudo_trybe");
+db.scores.find(
+  { results: { $elemMatch: { $gte: 80, $lt: 85 } } }
+);
+
+use("conteudo_trybe");
+db.survey.find(
+  { results: { $elemMatch: { product: "xyz", score: { $gte: 8 } } } }
+);
+
+
+// $size
+use("conteudo_trybe");
+db.newProducts.find( { tags: { $size: 2 } } );
+
+// $expr
+use("conteudo_trybe");
+db.monthlyBudget.find(
+  {
+    $expr: { $gt: [ "$spent", "$budget" ] }
+  }
+);
+
+// $regex -> USAR EXPRESSOES REGEX PARA PROCURAR UM DOCUMENTO ESPECIFICO
+use("conteudo_trybe");
+db.produtos.find({ sku: { $regex: /789$/ } });
+
+use("conteudo_trybe");
+db.produtos.find({ sku: { $regex: /^ABC/i } });
+
+
+// $text
+use("conteudo_trybe");
+db.articles.createIndex({ subject: "text" });
+db.articles.find({ $text: { $search: "\"coffee shop\"" } }); // PARA PESQUISAR POR FRASES "\ <FRASE> \"
+
+// $mod
+use("conteudo_trybe");
+db.inventory2.find({ qty: { $mod: [6, 0] } });

@@ -1,0 +1,167 @@
+use("class");
+db.movies.find();
+
+// EXERCICIO 1
+use("class");
+db.movies.find({
+  category: { $all: ["action", "adventure"] }
+})
+
+// EXERCICIO 2
+use("class");
+db.movies.find({
+  category: "action",
+  imdbRating: { $gt: 7 }
+})
+
+// EXERCICIO 3
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $push: { ratings: { $each: [85, 100, 102, 105] } } }
+)
+
+// EXERCICIO 4
+use("class");
+db.movies.updateOne(
+  { title: "Godzilla" },
+  { $push: { ratings: { $each: [78, 52, 95, 102] } } }
+)
+
+// EXERCICIO 5
+use("class");
+db.movies.updateOne(
+  { title: "Home Alone" },
+  { $push: { ratings: { $each: [200, 99, 65] } } }
+)
+
+// EXERCICIO 6
+use("class");
+db.movies.find(
+  { ratings: { $elemMatch: { $gt: 103 } } },
+  { title: 1, ratings: 1, _id: 0 }
+)
+
+// EXERCICIO 7
+use("class");
+db.movies.find(
+  { ratings: { $elemMatch: { $gte: 100, $lt: 105 } } },
+  { title: 1, ratings: 1, _id: 0 }
+);
+
+// EXERCICIO 8
+use("class");
+db.movies.find(
+  { 
+    ratings: { $elemMatch: { $gte: 64, $lt: 105 } },
+    ratings: { $mod: [9, 0] }
+  },
+  { title: 1, ratings: 1, _id: 0 }
+);
+
+// EXERCICIO 9
+use("class");
+db.movies.find(
+  { 
+    ratings: { $elemMatch: { $gt: 103 } },
+    category: "adventure"
+  },
+  { title: 1, ratings: 1, category: 1,  _id: 0 }
+);
+
+// EXERCICIO 10
+use("class");
+db.movies.find({
+  category: { $size: 2 }
+})
+
+// EXERCICIO 11
+use("class");
+db.movies.find({
+  ratings: { $size: 4 }
+})
+
+// EXERCICIO 12
+use("class");
+db.movies.find({
+  category: { $size: 2 },
+  budget: { $mod: [5, 0] }
+})
+
+// EXERCICIO 13
+use("class");
+db.movies.find(
+  { 
+    $or: [
+      { category: "sci-fi" },
+      { ratings: { $elemMatch: { $gt: 199 } } }
+    ]
+  },
+  { title: 1, ratings: 1, category: 1, _id: 0 }
+)
+
+// EXERCICIO 14
+use("class");
+db.movies.find({
+  $and: [
+    { 
+      ratings: { $size: 4 },
+      $or: [
+        { category: "adventure" },
+        { category: "family" }
+      ]
+    },
+    { imdbRating: { $not: { $lt: 7 } } }
+  ]
+})
+
+// EXERCICIO 15
+use("class");
+db.movies.updateOne(
+  { title: "Batman" },
+  { $set: { description: "The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker." } }
+);
+
+// EXERCICIO 16
+use("class");
+db.movies.updateOne(
+  { title: "Godzilla" },
+  { $set: { description: "The world is beset by the appearance of monstrous creatures, but one of them may be the only one who can save humanity." } }
+);
+
+// EXERCICIO 17
+use("class");
+db.movies.updateOne(
+  { title: "Home Alone" },
+  { $set: { description: "An eight-year-old troublemaker must protect his house from a pair of burglars when he is accidentally left home alone by his family during Christmas vacation." } }
+);
+
+// EXERCICIO 18
+use("class");
+db.movies.find({ description: { $regex: /^the/i } });
+
+// EXERCICIO 19
+use("class");
+db.movies.find({ description: { $regex: /humanity.$/ } });
+
+// EXERCICIO 20
+use("class");
+db.movies.createIndex({ description: "text" });
+
+// EXERCICIO 21
+use("class");
+db.movies.find({
+  $text: { $search: "vacation",  }
+})
+
+// EXERCICIO 22
+use("class");
+db.movies.find({
+  $text: { $search: "monstrous criminal" }
+})
+
+// EXERCICIO 23
+use("class");
+db.movies.find({
+  $text: { $search: "\" when he is accidentally \"" }
+})
